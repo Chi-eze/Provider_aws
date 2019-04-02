@@ -7,23 +7,25 @@ provider "aws" {
 # -----------------Building an EC2 instance----------------
 resource "aws_instance" "supermax" {
     ami = "ami-07683a44e80cd32c5"
-    instance_type =  "t2.micro"    
-    key_name = 
+    instance_type = "t2.micro"    
+    key_name = "${var.key_name}"
     vpc_security_group_ids = ["${aws_security_group.web-access.id}"]
-    
-
     tags = {
         Name = "Web-Serve"
     }         
 
 
-variable "server_port" {
-    description = "The port used for HTTP requests"
-    default = 22
 }
 
+variable "server_port" {
+    description = "The port used for HTTP request"
+    default = 22
+  
+}
+
+
 resource "aws_security_group" "web-access" {
-    name = "web-access"
+    name = "web-connect"
     ingress {
         from_port = "${var.server_port}"
         to_port = "${var.server_port}" 
@@ -38,5 +40,5 @@ resource "aws_security_group" "web-access" {
    
   }
 
-}
+
 
