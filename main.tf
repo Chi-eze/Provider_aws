@@ -8,7 +8,7 @@ provider "aws" {
 resource "aws_instance" "supermax" {
     ami = "ami-07683a44e80cd32c5"
     instance_type =  "t2.micro"    
-    key_name = "ceze"
+    key_name = 
     vpc_security_group_ids = ["${aws_security_group.web-access.id}"]
     
 
@@ -16,8 +16,6 @@ resource "aws_instance" "supermax" {
         Name = "Web-Serve"
     }         
 
-
-}
 
 variable "server_port" {
     description = "The port used for HTTP requests"
@@ -34,9 +32,11 @@ resource "aws_security_group" "web-access" {
     }
 
             tags {
-        Name = "Test-Chi"
+        Name = "Test-exec"
     
     }
-
    
+  }
+
 }
+
