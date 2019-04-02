@@ -23,6 +23,11 @@ variable "server_port" {
   
 }
 
+output "public_ip" {
+  value = "${aws_instance.supermax.public_ip}"
+}
+
+
 
 resource "aws_security_group" "web-access" {
     name = "web-connect"
