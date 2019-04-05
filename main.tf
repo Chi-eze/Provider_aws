@@ -122,7 +122,7 @@ resource "aws_autoscaling_group" "asg_ai" {
     load_balancers = ["${aws_elb.elb-ai.id}"]
     health_check_type = "ELB"
     tag {
-        Key = "explicit1"
+        key = "Name"
         value = "terraform-asg-example05"
         propagate_at_launch = true
 
