@@ -46,12 +46,12 @@ resource "aws_launch_configuration" "lc_ai" {
     security_groups = ["${aws_security_group.web-access.id}"]
     user_data = <<-EOF
                 #!/bin/bash
-                yum update -y
+                yum update
                 yum install httpd -y
-                cd /var/www/html
-                touch index.html
-                echo > "Hello, World" /var/www/html/index.html
-                chkconfig httpd on
+                cd /var/www/html/
+                touch  index.html
+                echo  "THIS IS A WEB HUB" > index.html
+                chkconfig on
                 EOF
 
                 lifecycle {
@@ -81,8 +81,7 @@ resource "aws_security_group" "web-access" {
 
             tags {
         Name = "Test-exec"
-    
-    }
+     }
 
     lifecycle {
         create_before_destroy = true 
@@ -102,7 +101,7 @@ resource "aws_security_group" "elb_sg" {
         from_port = 0
         to_port = 0
         protocol = "-1"
-        cidr_blocks =["${var.cidr_blocks}"]
+        cidr_blocks = ["${var.cidr_blocks}"]
     }
   
 }
@@ -150,7 +149,7 @@ resource "aws_elb" "elb-ai" {
         unhealthy_threshold = 2
         timeout = 3
         interval = 30
-        target ="http:${var.webaccess}/var/www/html/index.html"
+        target = "Http:${var.webaccess}/"
     }
 
   
